@@ -5,13 +5,13 @@ import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
+import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
 @Table(name = "CREDIT_OFFER", indexes = {
-        @Index(name = "IDX_CREDITOFFER_CLIENT_ID", columnList = "CLIENT_ID"),
-        @Index(name = "IDX_CREDITOFFER_CREDIT_ID", columnList = "CREDIT_ID"),
-        @Index(name = "IDX_CREDITOFFER", columnList = "SCHEDULE_PAYMENT_ID")
+        @Index(name = "IDX_CREDITOFFER_CREDIT_ID", columnList = "CREDIT_ID")
 })
 @Entity
 public class CreditOffer {
@@ -20,28 +20,36 @@ public class CreditOffer {
     @Id
     private UUID id;
 
-    @JoinColumn(name = "CLIENT_ID", nullable = false)
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private Client client;
-
     @JoinColumn(name = "CREDIT_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Credit credit;
 
+    @PositiveOrZero
     @Column(name = "SUM_CREDIT")
     private Double sumCredit;
 
-    @JoinColumn(name = "SCHEDULE_PAYMENT_ID", nullable = false)
+    @OneToMany(mappedBy = "creditOffer")
     @Composition
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    private SchedulePayment schedulePayment;
+    private List<SchedulePayment> schedulePayment;
 
-    public SchedulePayment getSchedulePayment() {
+    @JoinColumn(name = "CLIENT_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Client client;
+
+    public void setSchedulePayment(List<SchedulePayment> schedulePayment) {
+        this.schedulePayment = schedulePayment;
+    }
+
+    public List<SchedulePayment> getSchedulePayment() {
         return schedulePayment;
     }
 
-    public void setSchedulePayment(SchedulePayment schedulePayment) {
-        this.schedulePayment = schedulePayment;
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public Double getSumCredit() {
@@ -58,14 +66,6 @@ public class CreditOffer {
 
     public void setCredit(Credit credit) {
         this.credit = credit;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
     }
 
     public UUID getId() {

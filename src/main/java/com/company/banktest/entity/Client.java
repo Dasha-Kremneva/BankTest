@@ -5,6 +5,8 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
 import java.util.UUID;
 
 @JmixEntity
@@ -20,12 +22,15 @@ public class Client {
     @Column(name = "FULL_NAME", nullable = false)
     private String fullName;
 
+    @Pattern(regexp = "^([9]{1}[0-9]{9})?$")
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
+    @Email(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\\\\\.[A-Za-z0-9-]+)*(\\\\\\\\.[A-Za-z]{2,})$")
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
+    @Pattern(regexp = "^([0-9]{6})?$")
     @Column(name = "PASSPORT", nullable = false)
     private String passport;
 

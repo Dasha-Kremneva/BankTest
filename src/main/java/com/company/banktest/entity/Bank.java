@@ -5,13 +5,11 @@ import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "BANK", indexes = {
-        @Index(name = "IDX_BANK_LIST_CREDITS_ID", columnList = "LIST_CREDITS_ID"),
-        @Index(name = "IDX_BANK_LIST_CLIENTS_ID", columnList = "LIST_CLIENTS_ID")
-})
+@Table(name = "BANK")
 @Entity
 public class Bank {
     @JmixGeneratedValue
@@ -19,30 +17,28 @@ public class Bank {
     @Id
     private UUID id;
 
-    @JoinColumn(name = "LIST_CREDITS_ID")
+    @OneToMany(mappedBy = "bank")
     @Composition
-    @OneToOne(fetch = FetchType.LAZY)
-    private Credit listCredits;
+    private List<Credit> listCredits;
 
-    @JoinColumn(name = "LIST_CLIENTS_ID")
+    @OneToMany(mappedBy = "bank")
     @Composition
-    @OneToOne(fetch = FetchType.LAZY)
-    private Client listClients;
+    private List<Client> listClients;
 
-    public Client getListClients() {
-        return listClients;
-    }
-
-    public void setListClients(Client listClients) {
+    public void setListClients(List<Client> listClients) {
         this.listClients = listClients;
     }
 
-    public Credit getListCredits() {
-        return listCredits;
+    public List<Client> getListClients() {
+        return listClients;
     }
 
-    public void setListCredits(Credit listCredits) {
+    public void setListCredits(List<Credit> listCredits) {
         this.listCredits = listCredits;
+    }
+
+    public List<Credit> getListCredits() {
+        return listCredits;
     }
 
     public UUID getId() {

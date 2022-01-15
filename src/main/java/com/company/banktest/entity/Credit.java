@@ -1,12 +1,12 @@
 package com.company.banktest.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.UUID;
 
 @JmixEntity
@@ -18,11 +18,26 @@ public class Credit {
     @Id
     private UUID id;
 
+    @InstanceName
+    @PositiveOrZero(message = "positive or zero")
     @Column(name = "LIMIT_", nullable = false)
     private Double limit;
 
+    @Positive(message = "positive")
     @Column(name = "RATE", nullable = false)
     private Double rate;
+
+    @JoinColumn(name = "BANK_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Bank bank;
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     public Double getRate() {
         return rate;
