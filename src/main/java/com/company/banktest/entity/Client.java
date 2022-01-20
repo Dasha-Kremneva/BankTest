@@ -6,7 +6,6 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
 import java.util.UUID;
 
 @JmixEntity
@@ -22,20 +21,30 @@ public class Client {
     @Column(name = "FULL_NAME", nullable = false)
     private String fullName;
 
-    @Pattern(regexp = "^([9]{1}[0-9]{9})?$")
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    @Email(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\\\\\\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\\\\\\\.[A-Za-z0-9-]+)*(\\\\\\\\.[A-Za-z]{2,})$")
+    @Email
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
-    @Pattern(regexp = "^([0-9]{6})?$")
     @Column(name = "PASSPORT", nullable = false)
     private String passport;
 
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "client", optional = false)
     private CreditOffer creditOffer;
+
+    @JoinColumn(name = "BANK_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Bank bank;
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     public CreditOffer getCreditOffer() {
         return creditOffer;

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="BankTest">
+        <createTable tableName="BANK">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_BANK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="BankTest">
+        <createTable tableName="CLIENT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CLIENT"/>
+            </column>
+            <column name="FULL_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHONE" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PASSPORT" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="BankTest">
+        <createTable tableName="CREDIT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CREDIT"/>
+            </column>
+            <column name="LIMIT_" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RATE" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BANK_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="BankTest">
+        <createTable tableName="CREDIT_OFFER">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CREDIT_OFFER"/>
+            </column>
+            <column name="CREDIT_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUM_CREDIT" type="DOUBLE"/>
+            <column name="CLIENT_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="BankTest">
+        <createTable tableName="SCHEDULE_PAYMENT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_SCHEDULE_PAYMENT"/>
+            </column>
+            <column name="DATE_" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUM_PAY" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUM_BODY" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SUM_PERCENT" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREDIT_OFFER_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="BankTest">
+        <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="CREDIT_OFFER"
+                                 constraintName="FK_CREDIT_OFFER_ON_CLIENT" referencedColumnNames="ID"
+                                 referencedTableName="CLIENT"/>
+    </changeSet>
+    <changeSet id="7" author="BankTest">
+        <addForeignKeyConstraint baseColumnNames="CREDIT_ID" baseTableName="CREDIT_OFFER"
+                                 constraintName="FK_CREDIT_OFFER_ON_CREDIT" referencedColumnNames="ID"
+                                 referencedTableName="CREDIT"/>
+
+        <createIndex indexName="IDX_CREDITOFFER_CREDIT_ID" tableName="CREDIT_OFFER">
+            <column name="CREDIT_ID"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="8" author="BankTest">
+        <addForeignKeyConstraint baseColumnNames="BANK_ID" baseTableName="CREDIT" constraintName="FK_CREDIT_ON_BANK"
+                                 referencedColumnNames="ID" referencedTableName="BANK"/>
+    </changeSet>
+    <changeSet id="9" author="BankTest">
+        <addForeignKeyConstraint baseColumnNames="CREDIT_OFFER_ID" baseTableName="SCHEDULE_PAYMENT"
+                                 constraintName="FK_SCHEDULEPAYM_ON_CREDITOFFER" referencedColumnNames="ID"
+                                 referencedTableName="CREDIT_OFFER"/>
+    </changeSet>
+</databaseChangeLog>

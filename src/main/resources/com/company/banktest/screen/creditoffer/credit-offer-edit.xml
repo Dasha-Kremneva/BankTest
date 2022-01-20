@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://creditOfferEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="creditOfferDc"
+                  class="com.company.banktest.entity.CreditOffer">
+            <fetchPlan extends="_base">
+                <property name="credit" fetchPlan="_base"/>
+                <property name="schedulePayment" fetchPlan="_base"/>
+                <property name="client" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="schedulePaymentDc" property="schedulePayment"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="creditOfferDc">
+            <column width="350px">
+
+                <entityPicker id="clientField" property="client" caption="Client">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <entityPicker id="creditField" property="credit" caption="Credit">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+                <textField id="sumCreditField" property="sumCredit" caption="Sum credit"/>
+
+            </column>
+        </form>
+        <groupBox id="schedulePaymentBox" caption="msg://com.company.banktest.entity/CreditOffer.schedulePayment">
+            <table id="schedulePaymentTable" dataContainer="schedulePaymentDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="date" caption="Date"/>
+                    <column id="sumPay" caption="Sum pay"/>
+                    <column id="sumBody" caption="Sum body"/>
+                    <column id="sumPercent" caption="Sum percent"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="schedulePaymentTable.create"/>
+                    <button action="schedulePaymentTable.edit"/>
+                    <button action="schedulePaymentTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

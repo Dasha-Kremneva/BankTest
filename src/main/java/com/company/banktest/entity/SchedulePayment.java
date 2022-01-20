@@ -4,7 +4,6 @@ import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,15 +19,12 @@ public class SchedulePayment {
     @Column(name = "DATE_", nullable = false)
     private LocalDateTime date;
 
-    @PositiveOrZero
     @Column(name = "SUM_PAY", nullable = false)
     private Double sumPay;
 
-    @PositiveOrZero
     @Column(name = "SUM_BODY", nullable = false)
     private Double sumBody;
 
-    @PositiveOrZero
     @Column(name = "SUM_PERCENT", nullable = false)
     private Double sumPercent;
 

@@ -21,17 +21,9 @@ public class Bank {
     @Composition
     private List<Credit> listCredits;
 
-    @OneToMany(mappedBy = "bank")
     @Composition
+    @OneToMany(mappedBy = "bank")
     private List<Client> listClients;
-
-    public void setListClients(List<Client> listClients) {
-        this.listClients = listClients;
-    }
-
-    public List<Client> getListClients() {
-        return listClients;
-    }
 
     public void setListCredits(List<Credit> listCredits) {
         this.listCredits = listCredits;
@@ -41,6 +33,14 @@ public class Bank {
         return listCredits;
     }
 
+    public List<Client> getListClients() {
+        return listClients;
+    }
+
+    public void setListClients(List<Client> listClients) {
+        this.listClients = listClients;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -48,4 +48,5 @@ public class Bank {
     public void setId(UUID id) {
         this.id = id;
     }
+
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://schedulePaymentBrowse.caption"
+        focusComponent="schedulePaymentsTable">
+    <data readOnly="true">
+        <collection id="schedulePaymentsDc"
+                    class="com.company.banktest.entity.SchedulePayment">
+            <fetchPlan extends="_base">
+                <property name="creditOffer" fetchPlan="_base">
+                    <property name="client" fetchPlan="_base"/>
+                    <property name="credit" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="schedulePaymentsDl">
+                <query>
+                    <![CDATA[select e from SchedulePayment e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="schedulePaymentsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="schedulePaymentsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="schedulePaymentsTable"
+                    width="100%"
+                    dataContainer="schedulePaymentsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="date" caption="Date"/>
+                <column id="sumPay" caption="Sum pay"/>
+                <column id="sumBody" caption="Sum body"/>
+                <column id="sumPercent" caption="Sum percent"/>
+                <column id="creditOffer" caption="Credit offer"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="schedulePaymentsTable.create"/>
+                <button id="editBtn" action="schedulePaymentsTable.edit"/>
+                <button id="removeBtn" action="schedulePaymentsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

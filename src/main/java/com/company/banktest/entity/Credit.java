@@ -18,17 +18,17 @@ public class Credit {
     @Id
     private UUID id;
 
+    @PositiveOrZero
     @InstanceName
-    @PositiveOrZero(message = "positive or zero")
     @Column(name = "LIMIT_", nullable = false)
     private Double limit;
 
-    @Positive(message = "positive")
+    @Positive
     @Column(name = "RATE", nullable = false)
     private Double rate;
 
-    @JoinColumn(name = "BANK_ID", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "BANK_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Bank bank;
 
     public Bank getBank() {
@@ -38,6 +38,11 @@ public class Credit {
     public void setBank(Bank bank) {
         this.bank = bank;
     }
+
+    @JoinColumn(name = "BANK_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+   
 
     public Double getRate() {
         return rate;

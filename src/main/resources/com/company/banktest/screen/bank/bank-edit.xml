@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://bankEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="bankDc"
+                  class="com.company.banktest.entity.Bank">
+            <fetchPlan extends="_base">
+                <property name="listCredits" fetchPlan="_base"/>
+                <property name="listClients" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="listCreditsDc" property="listCredits"/>
+            <collection id="listClientsDc" property="listClients"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="bankDc">
+            <column width="350px">
+            </column>
+        </form>
+        <groupBox id="listCreditsBox">
+            <table id="listCreditsTable" dataContainer="listCreditsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="limit" caption="Limit"/>
+                    <column id="rate" caption="Rate"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="listCreditsTable.create"/>
+                    <button action="listCreditsTable.edit"/>
+                    <button action="listCreditsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="listClientsBox">
+            <table id="listClientsTable" dataContainer="listClientsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="fullName" caption="Full name"/>
+                    <column id="phone" caption="Phone"/>
+                    <column id="email" caption="Email"/>
+                    <column id="passport" caption="Passport"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="listClientsTable.create"/>
+                    <button action="listClientsTable.edit"/>
+                    <button action="listClientsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

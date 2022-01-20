@@ -2,16 +2,17 @@ package com.company.banktest.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.Composition;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Positive;
 import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
 @Table(name = "CREDIT_OFFER", indexes = {
-        @Index(name = "IDX_CREDITOFFER_CREDIT_ID", columnList = "CREDIT_ID")
+        @Index(name = "IDX_CREDIT_OFFER_CREDIT_ID", columnList = "CREDIT_ID")
 })
 @Entity
 public class CreditOffer {
@@ -20,21 +21,22 @@ public class CreditOffer {
     @Id
     private UUID id;
 
+    @JoinColumn(name = "CLIENT_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @InstanceName
+    private Client client;
+
     @JoinColumn(name = "CREDIT_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Credit credit;
 
-    @PositiveOrZero
+    @Positive
     @Column(name = "SUM_CREDIT")
     private Double sumCredit;
 
     @OneToMany(mappedBy = "creditOffer")
     @Composition
     private List<SchedulePayment> schedulePayment;
-
-    @JoinColumn(name = "CLIENT_ID", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Client client;
 
     public void setSchedulePayment(List<SchedulePayment> schedulePayment) {
         this.schedulePayment = schedulePayment;
