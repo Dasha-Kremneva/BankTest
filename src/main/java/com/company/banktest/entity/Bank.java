@@ -2,6 +2,7 @@ package com.company.banktest.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.Composition;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
@@ -17,6 +18,10 @@ public class Bank {
     @Id
     private UUID id;
 
+    @InstanceName
+    @Column(name = "NAME_BANK")
+    private String nameBank;
+
     @OneToMany(mappedBy = "bank")
     @Composition
     private List<Credit> listCredits;
@@ -24,6 +29,14 @@ public class Bank {
     @Composition
     @OneToMany(mappedBy = "bank")
     private List<Client> listClients;
+
+    public String getNameBank() {
+        return nameBank;
+    }
+
+    public void setNameBank(String nameBank) {
+        this.nameBank = nameBank;
+    }
 
     public void setListCredits(List<Credit> listCredits) {
         this.listCredits = listCredits;

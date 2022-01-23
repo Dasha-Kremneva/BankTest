@@ -7,8 +7,12 @@
         <collection id="creditOffersDc"
                     class="com.company.banktest.entity.CreditOffer">
             <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_instance_name">
+                    <property name="phone"/>
+                    <property name="email"/>
+                    <property name="passport"/>
+                </property>
                 <property name="credit" fetchPlan="_base"/>
-                <property name="client" fetchPlan="_base"/>
             </fetchPlan>
             <loader id="creditOffersDl">
                 <query>
@@ -50,6 +54,7 @@
                 <column id="client" caption="Client"/>
                 <column id="credit" caption="Credit"/>
                 <column id="sumCredit" caption="Sum credit"/>
+                <column id="termCredit" caption="Term credit"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

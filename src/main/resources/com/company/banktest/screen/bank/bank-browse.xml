@@ -6,10 +6,7 @@
     <data readOnly="true">
         <collection id="banksDc"
                     class="com.company.banktest.entity.Bank">
-            <fetchPlan extends="_base">
-                <property name="listCredits" fetchPlan="_base"/>
-                <property name="listClients" fetchPlan="_base"/>
-            </fetchPlan>
+            <fetchPlan extends="_base"/>
             <loader id="banksDl">
                 <query>
                     <![CDATA[select e from Bank e]]>
@@ -47,9 +44,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="listCredits" caption="List credits">
-                </column>
-                <column id="listClients" caption="List clients"/>
+                <column id="nameBank" caption="Name bank"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

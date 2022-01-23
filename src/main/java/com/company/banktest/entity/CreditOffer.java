@@ -34,9 +34,20 @@ public class CreditOffer {
     @Column(name = "SUM_CREDIT")
     private Double sumCredit;
 
+    @Column(name = "TERM_CREDIT", nullable = false)
+    private Integer termCredit;
+
     @OneToMany(mappedBy = "creditOffer")
     @Composition
     private List<SchedulePayment> schedulePayment;
+
+    public Integer getTermCredit() {
+        return termCredit;
+    }
+
+    public void setTermCredit(Integer termCredit) {
+        this.termCredit = termCredit;
+    }
 
     public void setSchedulePayment(List<SchedulePayment> schedulePayment) {
         this.schedulePayment = schedulePayment;
