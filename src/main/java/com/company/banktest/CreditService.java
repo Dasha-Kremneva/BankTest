@@ -1,11 +1,11 @@
 package com.company.banktest;
 
-import com.company.banktest.entity.CreditOffer;
 import com.company.banktest.entity.SchedulePayment;
 import io.jmix.core.DataManager;
-import io.jmix.core.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service
 public class CreditService {
@@ -13,22 +13,22 @@ public class CreditService {
     @Autowired
     private DataManager dataManager;
 
-    public Double findSumBodyCredit() {
+    public Double findSumBodyCredit(SchedulePayment schedulePayment) {
         //сумма ежемесяного платежа по телу кредита = сумма кредита/срок кредита в месяцах
-        Integer term = getCreditTerm(this);
-        Double creditSum = getCreditSum(this);
-        return creditSum/term;
+        Integer term = getCreditTerm(schedulePayment.getId());
+        Double creditSum = getCreditSum(schedulePayment.getId());
+        return creditSum / term;
     }
 
     //обращение к атрибуту "term" из SchedulePayment
-    Integer getCreditTerm(Id<SchedulePayment> id) {
-        SchedulePayment schedulePayment= dataManager.load(id).one();
+    public Integer getCreditTerm(UUID id) {
+        SchedulePayment schedulePayment = dataManager.load(SchedulePayment.class).id(id).one();
         return schedulePayment.getCreditOffer().getTermCredit();
     }
 
     //обращение к атрибуту "sumCredit" из SchedulePayment
-    Double getCreditSum(Id<SchedulePayment> id) {
-        SchedulePayment schedulePayment= dataManager.load(id).one();
+    public Double getCreditSum(UUID id) {
+        SchedulePayment schedulePayment = dataManager.load(SchedulePayment.class).id(id).one();
         return schedulePayment.getCreditOffer().getSumCredit();
     }
 }
