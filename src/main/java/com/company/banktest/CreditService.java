@@ -14,7 +14,7 @@ public class CreditService {
     private DataManager dataManager;
 
     public Double findSumBodyCredit(SchedulePayment schedulePayment) {
-        //сумма ежемесяного платежа по телу кредита = сумма кредита/срок кредита в месяцах
+        //сумма платежа по телу кредита = сумма кредита/срок кредита в месяцах
         Integer term = getCreditTerm(schedulePayment.getId());
         Double creditSum = getCreditSum(schedulePayment.getId());
         return creditSum / term;

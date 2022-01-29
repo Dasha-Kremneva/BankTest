@@ -1,10 +1,34 @@
 package com.company.banktest.screen.creditoffer;
 
+
+import com.company.banktest.entity.SchedulePayment;
+import io.jmix.core.DataManager;
+import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.screen.*;
 import com.company.banktest.entity.CreditOffer;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.inject.Inject;
+
 
 @UiController("CreditOffer.edit")
 @UiDescriptor("credit-offer-edit.xml")
 @EditedEntityContainer("creditOfferDc")
 public class CreditOfferEdit extends StandardEditor<CreditOffer> {
+
+    @Autowired
+    private DataManager dataManager;
+
+    @Inject
+    private ScreenBuilders screenBuilders;
+
+    SchedulePayment schedulePayment = dataManager.create(SchedulePayment.class);
+
+    //открытие редактора по умолчанию для сущности SchedulePayment
+    public void editSelectedEntity(SchedulePayment schedulePayment) {
+        screenBuilders.editor(SchedulePayment.class, this)
+                .editEntity(schedulePayment)
+                .build()
+                .show();
+    }
 }
