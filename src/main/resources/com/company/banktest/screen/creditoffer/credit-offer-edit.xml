@@ -61,6 +61,7 @@
                     <column id="sumPercent" caption="Sum percent"/>
                 </columns>
                 <buttonsPanel>
+                    <button caption="after create" id="myButton"/>
                     <button action="schedulePaymentTable.create"/>
                     <button action="schedulePaymentTable.edit"/>
                     <button action="schedulePaymentTable.remove"/>
@@ -71,5 +72,6 @@
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
         </hbox>
+
     </layout>
 </window>

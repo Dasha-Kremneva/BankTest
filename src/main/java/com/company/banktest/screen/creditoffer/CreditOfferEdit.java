@@ -4,6 +4,7 @@ package com.company.banktest.screen.creditoffer;
 import com.company.banktest.entity.SchedulePayment;
 import io.jmix.core.DataManager;
 import io.jmix.ui.ScreenBuilders;
+import io.jmix.ui.component.Button;
 import io.jmix.ui.screen.*;
 import com.company.banktest.entity.CreditOffer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,16 @@ public class CreditOfferEdit extends StandardEditor<CreditOffer> {
     @Autowired
     private DataManager dataManager;
 
+    CreditOfferEdit creditOfferEdit;
+
     @Inject
     private ScreenBuilders screenBuilders;
 
-    SchedulePayment schedulePayment = dataManager.create(SchedulePayment.class);
+    @Subscribe("myButton")
+    public void onMyButtonClick(Button.ClickEvent event) {
+        SchedulePayment schedulePayment = dataManager.create(SchedulePayment.class);
+        creditOfferEdit.editSelectedEntity(schedulePayment);
+    }
 
     //открытие редактора по умолчанию для сущности SchedulePayment
     public void editSelectedEntity(SchedulePayment schedulePayment) {
