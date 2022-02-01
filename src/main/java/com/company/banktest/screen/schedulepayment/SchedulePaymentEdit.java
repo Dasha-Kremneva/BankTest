@@ -21,13 +21,14 @@ public class SchedulePaymentEdit extends StandardEditor<SchedulePayment> {
     private DateField<LocalDateTime> dateField;
 
     //Автоматический расчет суммы ежемесяного платежа по телу кредита
-    @Subscribe
-    public void onInitEntity(InitEntityEvent<SchedulePayment> event) {
-        event.getEntity().setSumBody(creditService.findSumBodyCredit(getEditedEntity()));
-    }
+//    @Subscribe
+//    public void onInitEntity(InitEntityEvent<SchedulePayment> event) {
+//        getEditedEntity().setSumBody(creditService.findSumBodyCredit(getEditedEntity()));
+//    }
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
         dateField.setValue(LocalDateTime.now());
+        getEditedEntity().setSumBody(creditService.findSumBodyCredit(getEditedEntity()));
     }
 }

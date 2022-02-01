@@ -4,6 +4,7 @@ import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,6 +20,10 @@ public class SchedulePayment {
     @Column(name = "DATE_", nullable = false)
     private LocalDateTime date;
 
+    @PositiveOrZero
+    @Column(name = "START_BALANCE")
+    private Double startBalance;
+
     @Column(name = "SUM_PAY", nullable = false)
     private Double sumPay;
 
@@ -31,6 +36,26 @@ public class SchedulePayment {
     @JoinColumn(name = "CREDIT_OFFER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private CreditOffer creditOffer;
+
+    @PositiveOrZero
+    @Column(name = "END_BALANCE")
+    private Double endBalance;
+
+    public Double getEndBalance() {
+        return endBalance;
+    }
+
+    public void setEndBalance(Double endBalance) {
+        this.endBalance = endBalance;
+    }
+
+    public Double getStartBalance() {
+        return startBalance;
+    }
+
+    public void setStartBalance(Double startBalance) {
+        this.startBalance = startBalance;
+    }
 
     public CreditOffer getCreditOffer() {
         return creditOffer;

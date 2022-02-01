@@ -61,7 +61,7 @@
                     <column id="sumPercent" caption="Sum percent"/>
                 </columns>
                 <buttonsPanel>
-                    <button caption="after create" id="myButton"/>
+                    <button caption="my button" id="myButton"/>
                     <button action="schedulePaymentTable.create"/>
                     <button action="schedulePaymentTable.edit"/>
                     <button action="schedulePaymentTable.remove"/>

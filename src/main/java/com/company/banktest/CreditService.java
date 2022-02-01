@@ -15,20 +15,18 @@ public class CreditService {
 
     public Double findSumBodyCredit(SchedulePayment schedulePayment) {
         //сумма платежа по телу кредита = сумма кредита/срок кредита в месяцах
-        Integer term = getCreditTerm(schedulePayment.getId());
-        Double creditSum = getCreditSum(schedulePayment.getId());
+        Integer term = getCreditTerm(schedulePayment);
+        Double creditSum = getCreditSum(schedulePayment);
         return creditSum / term;
     }
 
     //обращение к атрибуту "term" из SchedulePayment
-    public Integer getCreditTerm(UUID id) {
-        SchedulePayment schedulePayment = dataManager.load(SchedulePayment.class).id(id).one();
+    public Integer getCreditTerm(SchedulePayment schedulePayment) {
         return schedulePayment.getCreditOffer().getTermCredit();
     }
 
     //обращение к атрибуту "sumCredit" из SchedulePayment
-    public Double getCreditSum(UUID id) {
-        SchedulePayment schedulePayment = dataManager.load(SchedulePayment.class).id(id).one();
+    public Double getCreditSum(SchedulePayment schedulePayment) {
         return schedulePayment.getCreditOffer().getSumCredit();
     }
 }
