@@ -31,20 +31,20 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="creditOfferDc">
             <column width="350px">
-                <entityPicker id="clientField" property="client" caption="Client">
+                <entityPicker id="clientField" property="client">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <entityPicker id="creditField" property="credit" caption="Credit">
+                <entityPicker id="creditField" property="credit">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
-                <textField id="sumCreditField" property="sumCredit" caption="Sum credit"/>
-                <textField id="termCreditField" property="termCredit" caption="Term credit"/>
+                <textField id="sumCreditField" property="sumCredit"/>
+                <textField id="termCreditField" property="termCredit"/>
             </column>
         </form>
         <groupBox id="schedulePaymentBox">
@@ -55,23 +55,25 @@
                     <action id="remove" type="remove"/>
                 </actions>
                 <columns>
-                    <column id="date" caption="Date"/>
-                    <column id="sumPay" caption="Sum pay"/>
-                    <column id="sumBody" caption="Sum body"/>
-                    <column id="sumPercent" caption="Sum percent"/>
+                    <column id="date"/>
+                    <column id="startBalance"/>
+                    <column id="sumPay"/>
+                    <column id="sumBody"/>
+                    <column id="sumPercent"/>
+                    <column id="endBalance"/>
                 </columns>
                 <buttonsPanel>
-                    <button caption="my button" id="myButton"/>
                     <button action="schedulePaymentTable.create"/>
                     <button action="schedulePaymentTable.edit"/>
                     <button action="schedulePaymentTable.remove"/>
+                    <button id="myButton" caption="my button"/>
                 </buttonsPanel>
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
-        </hbox>
 
+        </hbox>
     </layout>
 </window>

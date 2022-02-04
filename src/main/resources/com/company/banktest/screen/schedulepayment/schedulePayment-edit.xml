@@ -27,10 +27,12 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="schedulePaymentDc">
             <column width="350px">
-                <dateField id="dateField" property="date"/>
-                <textField id="sumPayField" property="sumPay"/>
-                <textField id="sumBodyField" property="sumBody"/>
-                <textField id="sumPercentField" property="sumPercent"/>
+                <dateField id="dateField" property="date" caption="Date"/>
+                <textField id="startBalanceField" property="startBalance" caption="Start balance"/>
+                <textField id="sumPayField" property="sumPay" caption="Sum pay"/>
+                <textField id="sumBodyField" property="sumBody" caption="Sum body"/>
+                <textField id="sumPercentField" property="sumPercent" caption="Sum percent"/>
+                <textField id="endBalanceField" property="endBalance" caption="End balance"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

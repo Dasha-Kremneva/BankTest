@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
-
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
         caption="msg://schedulePaymentBrowse.caption"
         focusComponent="schedulePaymentsTable">
     <data readOnly="true">
@@ -45,9 +45,11 @@
             </actions>
             <columns>
                 <column id="date" caption="Date"/>
+                <column id="startBalance" caption="Start balance"/>
                 <column id="sumPay" caption="Sum pay"/>
                 <column id="sumBody" caption="Sum body"/>
                 <column id="sumPercent" caption="Sum percent"/>
+                <column id="endBalance" caption="End balance"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

@@ -1,13 +1,12 @@
 package com.company.banktest.screen.creditoffer;
 
-
+import io.jmix.ui.screen.*;
+import com.company.banktest.entity.CreditOffer;
 import com.company.banktest.CreditService;
 import com.company.banktest.entity.SchedulePayment;
 import io.jmix.core.DataManager;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.component.Button;
-import io.jmix.ui.screen.*;
-import com.company.banktest.entity.CreditOffer;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.inject.Inject;
 
@@ -29,7 +28,7 @@ public class CreditOfferEdit extends StandardEditor<CreditOffer> {
     public void onMyButtonClick(Button.ClickEvent event) {
         SchedulePayment schedulePayment = dataManager.create(SchedulePayment.class);
         schedulePayment.setCreditOffer(getEditedEntity());
-//        schedulePayment.setSumBody(creditService.findSumBodyCredit(schedulePayment));
+        // schedulePayment.setSumBody(creditService.findSumBodyCredit(schedulePayment));
         editSelectedEntity(schedulePayment);
     }
 
