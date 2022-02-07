@@ -33,14 +33,14 @@
             <column width="350px">
                 <entityPicker id="clientField" property="client">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
+                        <action id="entityLookup"/>
+                        <action id="entityClear"/>
                     </actions>
                 </entityPicker>
                 <entityPicker id="creditField" property="credit">
                     <actions>
-                        <action id="entityLookup" type="entity_lookup"/>
-                        <action id="entityClear" type="entity_clear"/>
+                        <action id="entityLookup"/>
+                        <action id="entityClear"/>
                     </actions>
                 </entityPicker>
                 <textField id="sumCreditField" property="sumCredit"/>
@@ -50,7 +50,6 @@
         <groupBox id="schedulePaymentBox">
             <table id="schedulePaymentTable" dataContainer="schedulePaymentDc" width="100%" height="200px">
                 <actions>
-                    <action id="create" type="create"/>
                     <action id="edit" type="edit"/>
                     <action id="remove" type="remove"/>
                 </actions>
@@ -63,7 +62,6 @@
                     <column id="endBalance"/>
                 </columns>
                 <buttonsPanel>
-                    <button action="schedulePaymentTable.create"/>
                     <button action="schedulePaymentTable.edit"/>
                     <button action="schedulePaymentTable.remove"/>
                     <button id="myButton" caption="my button"/>

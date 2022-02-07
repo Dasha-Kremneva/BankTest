@@ -25,15 +25,15 @@ public class SchedulePaymentEdit extends StandardEditor<SchedulePayment> {
         getEditedEntity().setSumBody(creditService.findSumBodyCredit(getEditedEntity()));
 
         //стартовый баланс
-        if (creditService.findFirstPayment())
+        if (creditService.findFirstPayment(getEditedEntity()))
             getEditedEntity().setStartBalance(getEditedEntity().getCreditOffer().getSumCredit());
-        else getEditedEntity().setStartBalance(creditService.findLastPayment().getEndBalance());
+        else getEditedEntity().setStartBalance(creditService.findLastPayment(getEditedEntity()).getEndBalance());
 
         // % ставка
-        getEditedEntity().setSumPercent(getEditedEntity().getStartBalance()*(getEditedEntity().getCreditOffer().getCredit().getRate()/100));
+        getEditedEntity().setSumPercent(getEditedEntity().getStartBalance() * (getEditedEntity().getCreditOffer().getCredit().getRate() / 100));
         //сумма платежа
-        getEditedEntity().setSumPay(getEditedEntity().getSumBody()+getEditedEntity().getSumPercent());
+        getEditedEntity().setSumPay(getEditedEntity().getSumBody() + getEditedEntity().getSumPercent());
         //конечный баланс = начальный баланс - сумма платежа
-        getEditedEntity().setEndBalance(getEditedEntity().getStartBalance()- getEditedEntity().getSumPay());
+        getEditedEntity().setEndBalance(getEditedEntity().getStartBalance() - getEditedEntity().getSumPay());
     }
 }
